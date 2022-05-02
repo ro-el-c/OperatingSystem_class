@@ -30,7 +30,7 @@ void *doSomeThing(void *arg)
 
     printf("\n%s finished! counter=%d\n", t_name, --counter); // 의도 : 1 -> 0
 
-    pthread_mutext_unlock(&lock); // 잠금 해제
+    pthread_mutex_unlock(&lock); // 잠금 해제
 
     /* critical section 끝 */
 
@@ -43,7 +43,7 @@ int main(void)
     int err;
     char strbuf[THREAD_NUM][8];
 
-    if (phtread_mutex_init(&lock, NULL) != 0)
+    if (pthread_mutex_init(&lock, NULL) != 0)
     {
         printf("\nmutex init failed\n");
         return 1;
