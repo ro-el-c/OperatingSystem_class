@@ -45,19 +45,22 @@ int main(void)
 
     if (phtread_mutex_init(&lock, NULL) != 0)
     {
-        for (i = 0; i < THREAD_NUM; i++)
-        {
-            sprintf(strbuf[i], "[T%d]", i);
-            err = pthread_create(&(tid[i]), NULL, &doSomeThing, strbuf[i]);
-            if (err != 0)
-                printf("\ncan't create thread : [%s]", strerror(err));
-        }
-
-        for (i = 0; i < THREAD_NUM; i++)
-            pthread_join(tid[i], NULL);
-
-        printf("\n");
+        printf("\nmutex init failed\n");
+        return 1;
     }
+
+    for (i = 0; i < THREAD_NUM; i++)
+    {
+        sprintf(strbuf[i], "[T%d]", i);
+        err = pthread_create(&(tid[i]), NULL, &doSomeThing, strbuf[i]);
+        if (err != 0)
+            printf("\ncan't create thread : [%s]", strerror(err));
+    }
+
+    for (i = 0; i < THREAD_NUM; i++)
+        pthread_join(tid[i], NULL);
+
+    printf("\n");
 
     return 0;
 }
