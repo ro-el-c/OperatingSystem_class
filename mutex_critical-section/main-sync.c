@@ -1,3 +1,13 @@
+/*
+    동기화
+    pthread_mutext_t lock;
+    pthread_mutex_lock(&lock);
+    pthread_mutex_unlock(&lock);
+
+    임계 구역
+    : 상호 배제적으로 접근할 수 있도록 해놓은 코스 세그먼트
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
@@ -15,7 +25,7 @@ void *doSomeThing(void *arg)
 {
     char *t_name = (char *)arg;
 
-    /* critical section 시작 */
+    /* critical section  (임계 구역) 시작 */
 
     pthread_mutex_lock(&lock); // 열쇠를 얻어, 잠근 후 들어감
 
